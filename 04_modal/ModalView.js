@@ -9,6 +9,7 @@ const ModalView = (props) => {
     return (
         <View style={styles.container}>
             <Modal
+                style={styles.modalStyle}
                 animationType="fade"
                 transparent={false}
                 visible={state.visible}
@@ -18,11 +19,13 @@ const ModalView = (props) => {
                     })
                 }}
             >
-                <View style={styles.modalView}>
-                    <Text style={styles.modalText}>Press to close</Text>
-                    <Pressable style={[styles.openButton, styles.closeButton]} onPress={() => setState({ visible: false })}>
-                        <Text>Close</Text>
-                    </Pressable>
+                <View style={styles.container}>
+                    <View style={styles.modalView}>
+                        <Text style={styles.modalText}>Press to close</Text>
+                        <Pressable style={[styles.openButton, styles.closeButton]} onPress={() => setState({ visible: false })}>
+                            <Text>Close</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </Modal>
             <Pressable style={styles.openButton}
@@ -40,9 +43,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: 'pink'
     },
+    modalStyle: {
+        backgroundColor: 'aqua',
+        flex: 1
+    },
     modalView: {
         margin: 10,
-        marginTop: 200,
+        //marginTop: 200,
         backgroundColor: "lightblue",
         padding: 20,
         alignItems: "center",
