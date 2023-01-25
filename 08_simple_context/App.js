@@ -1,12 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import ThemeContext, { themes } from './context/ThemeContext';
+import Headline from './components/Headline';
+import Paragraph from './components/Paragraph';
+import ThemeButton from './components/ThemeButton';
 
 export default function App() {
+
+  const [state, setState] = useState({
+    theme: themes.dark
+  })
+
+  const toggleTheme = () => {
+    if (state.theme === themes.dark) {
+      setState({
+        theme: themes.light
+      })
+    } else {
+      setState({
+        theme: themes.dark
+      })
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeContext.Provider value={state.theme}>
+      <View style={styles.container}>
+        <Headline>
+          Hello React Navigation
+        </Headline>
+        <Paragraph>
+          In a web browser, you can link to different pages using an anchor () tag. When the user clicks on a link, the URL is pushed to the browser history stack. When the user presses the back button, the browser pops the item from the top of the history stack, so the active page is now the previously visited page. React Native doesn't have a built-in idea of a global history stack like a web browser does -- this is where React Navigation enters the story.
+        </Paragraph>
+        <ThemeButton toggleTheme={toggleTheme} />
+      </View>
+    </ThemeContext.Provider>
   );
 }
 
